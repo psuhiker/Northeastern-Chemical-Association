@@ -5,8 +5,8 @@
     var EXECUTE_PAYMENT_URL = "<execute_payment_url>";
 
 	paypal.Button.render({
-		env: 'production',
-		//env: 'sandbox',
+		//env: 'production',
+		env: 'sandbox',
 		client: {
 			sandbox: 'AY1g1MroqreItNU8dKckR3wcUldyUODWST5Is0ww5z0DUjHt2FO7MQeGMJ1HNeHrBSlkgP6QA22m_uf9',
 			production: 'AamEnyX67fNMathIm04c8WBKPsvaytrUmi0q3HKNPPjftYzEx9gWGZx9Ypi6P8s5tNplVTYlylEdAuQ0'
