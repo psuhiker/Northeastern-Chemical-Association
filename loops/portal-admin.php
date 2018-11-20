@@ -76,6 +76,34 @@
 								
 								<h1 class="subheading--no-shadow lg-margin--top">Active NECA Members</h1>
 								
+								<?php 
+							    	$activeMembersCount = -1;
+									$activeMembers = get_users( [ 'role__in' => [ 'contributor', 'editor', 'administrator' ], 'meta_key' => 'last_name', 'orderby' => 'meta_value' ] );
+									foreach ( $activeMembers as $user ) {
+										$userid = 'user_'.$user->ID;
+									    $renewaldate = get_field('member_renewal', $userid);
+									    $renewaldate = new DateTime($renewaldate);
+										$activeRenewal = date('Y') . '1231'; if ( $renewaldate->format('Ymd') < $activeRenewal ) { } else {
+											$activeMembersCount++;
+										};
+										$membersPending = get_posts(array(
+											'post_type'	=> 'pending',
+											'posts_per_page' => -1,
+											'orderby' => 'title',
+											'order' => ASC,
+											'meta_query' => array( array(
+											    'key' => 'status',
+											    'value' => 'activePending' ))
+										));
+										$membersPendingCount = 0;
+										foreach ( $membersPending as $post ) {
+											$membersPendingCount++;
+										};
+										$activeMembersCountTotal = $activeMembersCount + $membersPendingCount;
+									};
+								?>
+							    <p class="fine-print"><?php echo $activeMembersCountTotal; ?> active members (includes <?php echo $membersPendingCount; ?> members who have not set up their account)</p>
+								
 								<div class="col-md-6 no-padding--horizontal">
 								    <form id="filterForm" onsubmit="return false;">
 								    	<input id="filterActive" type="text" class="input-text" placeholder="Search Active Members...">
@@ -203,6 +231,19 @@
 							
 							    <h1 class="subheading--no-shadow lg-margin--top">NECA Members with Lapsed Membership</h1>
 							    
+							    <?php 
+							    	$lapsedMembersCount = 0;
+									$lapsedMembers = get_users( [ 'role__in' => [ 'contributor', 'editor' ], 'meta_key' => 'last_name', 'orderby' => 'meta_value' ] );
+									foreach ( $lapsedMembers as $user ) {
+										$userid = 'user_'.$user->ID;
+									    $renewaldate = get_field('member_renewal', $userid);
+									    $renewaldate = new DateTime($renewaldate);
+										$activeRenewal = date('Y') . '1231'; if ( $renewaldate->format('Ymd') < $activeRenewal ) {
+											$lapsedMembersCount++;
+										};
+									};
+								?>
+							    <p class="fine-print"><?php echo $lapsedMembersCount; ?> lapsed members</p>
 							    <div class="col-md-6 no-padding--horizontal">
 							        <form id="filterForm" onsubmit="return false;">
 							        	<input id="filterLapsed" type="text" class="input-text" placeholder="Search Lapsed Members...">
@@ -241,6 +282,23 @@
 						    <div class="searchablePending">
 						      
 						        <h1 class="subheading--no-shadow lg-margin--top">Pending Applicants</h1>
+						        
+						        <?php 
+							    	$pendingApplicants = get_posts(array(
+						        		'post_type'	=> 'pending',
+						        		'posts_per_page' => -1,
+						        		'orderby' => 'title',
+						        		'order' => ASC,
+						        		'meta_query' => array( array(
+						        		    'key' => 'status',
+						        		    'value' => 'pending' ))
+						        	));
+						        	$pendingApplicantsCount = 0;
+							    	foreach ( $pendingApplicants as $post ) {
+										$pendingApplicantsCount++;
+									};							    	
+								?>
+							    <p class="fine-print"><?php echo $pendingApplicantsCount; ?> applicants to be approved or denied</p>
 						          
 						        <div class="col-md-6 no-padding--horizontal">
 						            <form id="filterForm" onsubmit="return false;">
