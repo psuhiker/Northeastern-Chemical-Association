@@ -26,6 +26,14 @@
     			<td>
     				Phone
     			</td>
+    			<?php if ( ! is_admin() ) { ?>
+    				<!--<td>
+    					Date Applied
+    				</td>
+    				<td>
+    					Membership Expires
+    				</td>-->
+    			<?php } ?>
     		</tr>
     	</thead>
     	
@@ -79,6 +87,14 @@
 		    				&nbsp;
 		    			<?php } ?>
 		    		</td>
+		    		<?php if ( ! is_admin() ) { ?>
+    					<!--<td>
+    						<?php the_field('member_registered', $userid); ?>
+    					</td>
+    					<td>
+    						<?php the_field('member_renewal', $userid); ?>
+    					</td>-->
+    				<?php } ?>
 		    	</tr>
 		    	
 		   	<?php } ?>
