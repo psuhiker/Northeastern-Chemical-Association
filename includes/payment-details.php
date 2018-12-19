@@ -5,7 +5,15 @@
     <?php 
         $display_title = 'New Membership Dues';
         $display_price = $_GET['display_price'];
-        $display_expires = 'Expires: 12/31/' . date('Y');
+        //$display_expires = 'Expires: 12/31/' . date('Y');
+		$currentDay = date(z) + 1;
+	    $nextYearTrigger = 335;
+	    if ($currentDay > $nextYearTrigger) {
+	    	$newYear = date('Y') + 1;
+	    	$display_expires = '12/31/' . $newYear;
+	    } else {
+	    	$display_expires = '12/31/' . date('Y');
+	    }
         $display_name = $_GET['display_name'];
         $display_company = $_GET['display_company'];
         $display_email = $_GET['display_email'];
