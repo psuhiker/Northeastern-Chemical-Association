@@ -229,7 +229,7 @@
 
 <div class="clearfix"></div>
 
-<div class="col-xs-12 lg-margin--top">
+<div class="col-xs-12 lg-margin--top hidden">
     
     <!--<?php 
         echo '<pre>';
