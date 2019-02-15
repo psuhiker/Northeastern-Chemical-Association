@@ -14,6 +14,18 @@
 	            <?php if (!empty(get_theme_mod( 'siteinformation_address' ))) { ?>
 	            	<p><?php echo ( get_theme_mod( 'siteinformation_address' ) ); ?></p>
 	            <?php } ?>
+	            <ul class="list-inline">
+	            	<li>
+	            		<a href="https://twitter.com/NortheastChem" target="_blank">
+	            			<img src="<?php bloginfo('template_directory'); ?>/images/contact-social-icon-twitter.png" width="25">
+	            		</a>
+	            	</li>
+	            	<li>
+	            		<a href="https://www.facebook.com/NortheastChem/" target="_blank">
+	            			<img src="<?php bloginfo('template_directory'); ?>/images/contact-social-icon-facebook.png" width="25">
+	            		</a>
+	            	</li>
+	            </ul>
 	            <div class="clearfix"></div>
 	        </div>
         
