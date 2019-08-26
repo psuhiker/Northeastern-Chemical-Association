@@ -28,3 +28,13 @@ add_action('init', 'change_role_name');
 if( get_role('author') ){
       remove_role( 'author' );
 }
+
+// Adds New Roles
+
+add_role(
+	'archived', 
+	__('Archived Member'), 
+	array(
+		'read' => true,
+	)
+);

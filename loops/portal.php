@@ -4,44 +4,64 @@
 
 	<section class="default">
     	<div class="container">
-        
-        	<?php 
-        	    $member_id = get_current_user_id();
-        	    $memberStatusDate = get_field('member_renewal', 'user_' . $member_id);
-        	    $memberStatusDate = new DateTime($memberStatusDate);
-        	    $expireDate = date('Y') . '1231'; 
-        	    $member_phone = get_field('member_phone', 'user_' . $member_id);
-        	    $member_company = get_field('member_company', 'user_' . $member_id);
-        	    if ( $memberStatusDate->format('Ymd') < $expireDate ) {
-        	?>
-        
-                <div class="col-sm-8 col-sm-push-4 col-md-9 col-md-push-3">
-                
-                    <p class="font-size--md lg-margin--bottom"><?php echo ( get_theme_mod( 'siteinformation_membership_inactive_text' ) ); ?></p>
-                    <p><a href="<?php echo site_url(); ?>/membership/renew/?display_name=<?php echo $current_user->user_firstname; ?> <?php echo $current_user->user_lastname; ?>&display_email=<?php echo $current_user->user_email; ?>&display_company=<?php echo $member_company; ?>&display_phone=<?php echo $member_phone; ?>&display_price=100.00" target="_blank" class="btn btn-default">Pay Membership Dues</a></p>
-                
-                </div>
-                <div class="clearfix"></div>
-        
-	        <?php } else { ?>
-	        
-	            <div class="col-sm-8 col-sm-push-4 col-md-9 col-md-push-3">
+    	
+    		<?php if(current_user_can('archived')) { ?>
+    		
+    			<div class="col-sm-8 col-sm-push-4 col-md-9 col-md-push-3">
 	                
-	                <?php if ( is_page('18') ) { ?>
-	                
-	                    <?php include (TEMPLATEPATH . '/loops/portal-announcements.php' ); ?>
-	                    
-	                <?php } elseif ( is_page('51') ) { ?>
-	                
-	                    <?php include (TEMPLATEPATH . '/loops/portal-profile.php' ); ?>
-	                    
-	                <?php } elseif ( is_page('250') ) { ?>
-	                
-	                    <?php include (TEMPLATEPATH . '/loops/portal-directory.php' ); ?>
-	                    
-	                <?php } ?>
-	            
+	            	<p class="font-size--md lg-margin--bottom">
+	            		Your account has been deactivated. This is likely due to a request from you to no longer be included in NECA membership or communications.
+	            	</p>
+	            	<p class="font-size--md lg-margin--bottom">
+	            		If this is a mistake or you would like to reactivate your account, please contact us.
+	            	</p>
+	                <p>
+	                	<a href="mailto:membership@necainc.com" target="_blank" class="btn btn-default">Email Membership Chair</a>
+	                </p>
 	            </div>
+	            <div class="clearfix"></div>
+    			
+    		<?php } else { ?>
+        
+	        	<?php 
+	        	    $member_id = get_current_user_id();
+	        	    $memberStatusDate = get_field('member_renewal', 'user_' . $member_id);
+	        	    $memberStatusDate = new DateTime($memberStatusDate);
+	        	    $expireDate = date('Y') . '1231'; 
+	        	    $member_phone = get_field('member_phone', 'user_' . $member_id);
+	        	    $member_company = get_field('member_company', 'user_' . $member_id);
+	        	    if ( $memberStatusDate->format('Ymd') < $expireDate ) {
+	        	?>
+	        
+	                <div class="col-sm-8 col-sm-push-4 col-md-9 col-md-push-3">
+	                
+	                    <p class="font-size--md lg-margin--bottom"><?php echo ( get_theme_mod( 'siteinformation_membership_inactive_text' ) ); ?></p>
+	                    <p><a href="<?php echo site_url(); ?>/membership/renew/?display_name=<?php echo $current_user->user_firstname; ?> <?php echo $current_user->user_lastname; ?>&display_email=<?php echo $current_user->user_email; ?>&display_company=<?php echo $member_company; ?>&display_phone=<?php echo $member_phone; ?>&display_price=100.00" target="_blank" class="btn btn-default">Pay Membership Dues</a></p>
+	                
+	                </div>
+	                <div class="clearfix"></div>
+        
+		        <?php } else { ?>
+		        
+		            <div class="col-sm-8 col-sm-push-4 col-md-9 col-md-push-3">
+		                
+		                <?php if ( is_page('18') ) { ?>
+		                
+		                    <?php include (TEMPLATEPATH . '/loops/portal-announcements.php' ); ?>
+		                    
+		                <?php } elseif ( is_page('51') ) { ?>
+		                
+		                    <?php include (TEMPLATEPATH . '/loops/portal-profile.php' ); ?>
+		                    
+		                <?php } elseif ( is_page('250') ) { ?>
+		                
+		                    <?php include (TEMPLATEPATH . '/loops/portal-directory.php' ); ?>
+		                    
+		                <?php } ?>
+		            
+		            </div>
+		        
+		        <?php } ?>
 	        
 	        <?php } ?>
 	        
